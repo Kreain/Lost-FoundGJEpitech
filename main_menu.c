@@ -69,6 +69,22 @@ sfSprite *create_help_button(void)
     return help;
 }
 
+void check_mouse_button(sfRenderWindow *window)
+{
+    sfVector2i pos_mouse = sfMouse_getPositionRenderWindow(window);
+    int x = 0;
+
+    if (pos_mouse.x >= 190 && pos_mouse.x <= 440)
+        if (pos_mouse.y <= 140 && pos_mouse.y >= 40)
+            //start
+            x++;
+        if (pos_mouse.y <= 340 && pos_mouse.y >= 140)
+            //help
+            x++;
+        if (pos_mouse.y <= 540 && pos_mouse.y >= 440)
+            sfRenderWindow_close(window);
+}
+
 int main_menu(void)
 {
     sfVideoMode video_mode = {1200, 600, 32};
@@ -79,10 +95,11 @@ int main_menu(void)
     sfSprite *help = create_help_button();
     sfSprite *quit = create_quit_button();
     sfEvent event;
-    sfMusic *music = sfMusic_createFromFile("music/evolve_main_theme.ogg");
+    sfMusic *music = sfMusic_createFromFile("evolve_main_theme.ogg");
+    sfText *title = sfText_create(); 
 
     sfMusic_play(music);
-   sfMusic_setLoop(music, sfTrue);
+    sfMusic_setLoop(music, sfTrue);
     while (sfRenderWindow_isOpen(window)) {
         sfRenderWindow_clear(window, sfBlack);
         sfRenderWindow_drawSprite(window, back, NULL);
@@ -94,6 +111,8 @@ int main_menu(void)
         while (sfRenderWindow_pollEvent(window, &event)) {
             if (event.type == sfEvtClosed)
                 sfRenderWindow_close(window);
+            if (event.mouseButton.button == sfMouseLeft)
+                check_mouse_button(window);
         }
     }
     sfMusic_destroy(music);
