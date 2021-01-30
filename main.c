@@ -28,7 +28,7 @@ int main(){
 	sfSprite_setTexture(sprite_map, texture_map, sfTrue);
 	//map (y/x)
 	update_map(compteurNiveau);
-	//caméra
+	//camï¿½ra
 	sfView* view;
 	view = sfView_create();
 	sfVector2f size = {sizeX*sizeD,sizeY*sizeD};
@@ -39,7 +39,7 @@ int main(){
 	//boucle
 	while (sfRenderWindow_isOpen(window)){
 		while (sfRenderWindow_pollEvent(window, &event)){
-			//événements clavier
+			//ï¿½vï¿½nements clavier
 			if (event.type == sfEvtClosed)
 				sfRenderWindow_close(window);
 		}

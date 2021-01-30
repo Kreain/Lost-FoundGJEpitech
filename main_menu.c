@@ -7,9 +7,6 @@
 
 #include "libs.h"
 
-sfRenderWindow *create_renderwindow(unsigned int x, unsigned int y,
-    unsigned int bytes, char *title);
-
 sfSprite *create_menu_background(void)
 {
     sfSprite *back = sfSprite_create();
@@ -82,7 +79,10 @@ int main(void)
     sfSprite *help = create_help_button();
     sfSprite *quit = create_quit_button();
     sfEvent event;
+    sfMusic *music = sfMusic_createFromFile("music/evolve_main_theme.ogg");
 
+    sfMusic_play(music);
+   sfMusic_setLoop(music, sfTrue);
     while (sfRenderWindow_isOpen(window)) {
         sfRenderWindow_clear(window, sfBlack);
         sfRenderWindow_drawSprite(window, back, NULL);
@@ -96,5 +96,12 @@ int main(void)
                 sfRenderWindow_close(window);
         }
     }
+    sfMusic_destroy(music);
+    sfSprite_destroy(back);
+    sfSprite_destroy(start);
+    sfSprite_destroy(help);
+    sfSprite_destroy(quit);
+    sfRectangleShape_destroy(banner);
+    sfRenderWindow_destroy(window);
     return 0;
 }
