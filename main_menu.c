@@ -69,7 +69,7 @@ sfSprite *create_help_button(void)
     return help;
 }
 
-int main(void)
+int main_menu(void)
 {
     sfVideoMode video_mode = {1200, 600, 32};
     sfRenderWindow *window = sfRenderWindow_create(video_mode, "Menu", sfResize | sfClose, NULL);
