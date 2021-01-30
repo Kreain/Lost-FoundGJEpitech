@@ -5,8 +5,9 @@ int compteurNiveau = 0;
 
 int main(){
 	//fenetre
-	sfVideoMode mode = { 1200, 600, 32 };
+	sfVideoMode mode = { 1920, 1080, 32 };
 	sfEvent event;
+	//sfRenderWindow* window = sfRenderWindow_create(mode, "SFML window", sfResize | sfClose, NULL);
 	sfRenderWindow* window = sfRenderWindow_create(mode, "SFML window", sfResize | sfClose, NULL);
 	//font & text
 	sfFont* font; 
@@ -30,10 +31,10 @@ int main(){
 	//caméra
 	sfView* view;
 	view = sfView_create();
-	sfVector2f size = { (sizeX * sizeD)*1.1,(sizeY*sizeD)*1.1};
-	sfVector2f center = { 150,75 };
-	sfView_setCenter(view, center);
+	sfVector2f size = {sizeX*sizeD,sizeY*sizeD};
+	sfVector2f sizeCenter = {(sizeX*sizeD)/2,sizeY*sizeD/2};
 	sfView_setSize(view, size);
+	sfView_setCenter(view, sizeCenter);
 	//personnage
 	//boucle
 	while (sfRenderWindow_isOpen(window)){

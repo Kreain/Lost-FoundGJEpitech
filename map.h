@@ -5,16 +5,16 @@
 #include <stdlib.h>
 #include <SFML/Graphics.h>
 
-const int sizeY = 5;const int sizeX = 10;
-const int sizeD = 32; //32 pixels dessin
-const int nbDitems = 10; //10 items max dans le tileset par ligne
+int sizeY = 5;int sizeX = 10;
+int sizeD = 32; //32 pixels dessin
+int nbDitems = 10; //10 items max dans le tileset par ligne
 
 sfTexture* texture_map;
 sfSprite* sprite_map;
 
 int map[5][10];
 
-const int map1[5][10] = {
+int map1[5][10] = {
 	{0,1,2,3,0,2,3,5,7,4},
 	{0,1,2,3,0,2,3,5,10,1000},
 	{0,1,2,3,0,2,3,5,11,4},
@@ -64,8 +64,9 @@ void affichage_map(sfText* text, sfWindow* window, sfView* view) {
 				sfSprite_setColor(sprite_map, sfWhite);
 			}
 			else{
-				sfSprite_setColor(sprite_map, sfBlack);
+				//sfSprite_setColor(sprite_map, sfBlack);
 			}
+			//printf("Le caractère %d a le code %d !\n", x,y);
 			sfSprite_setPosition(sprite_map, position);
 			sfSprite_setTextureRect(sprite_map,rectangle);
 			sfRenderWindow_drawSprite(window, sprite_map, NULL);
