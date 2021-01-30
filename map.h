@@ -1,11 +1,9 @@
 #ifndef MAP
 #define MAP
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <SFML/Graphics.h>
+#include "libs.h"
 
-int sizeY = 5;int sizeX = 10;
+int sizeY = 5; int sizeX = 10;
 int sizeD = 32; //32 pixels dessin
 int nbDitems = 10; //10 items max dans le tileset par ligne
 
@@ -30,14 +28,6 @@ int map1[5][10] = {
 	{0,1,2,3,0,2,3,5,4,4}
 };*/
 
-/*const int map3[5][10] = {
-	{0,1,2,3,0,2,3,5,4,4},
-	{0,1,2,3,0,2,3,5,4,1000},
-	{0,1,2,3,0,2,3,5,4,4},
-	{999,1,2,3,0,2,3,5,4,4},
-	{0,1,2,3,0,2,3,5,4,4}
-};*/
-
 void update_map(int choix) {
 	for (int y = 0; y < sizeY; y++) {
 		for (int x = 0; x < sizeX; x++) {
@@ -51,10 +41,9 @@ void update_map(int choix) {
 	}
 };
 
-void affichage_map(sfText* text, sfWindow* window, sfView* view) {
+void affichage_map(sfWindow* window) {
 	for (int y = 0; y < sizeY; y++) {
 		for (int x = 0; x < sizeX; x++) {
-			sfRenderWindow_setView(window, view);
 			int x_2 = ((map[y][x] - 1) % nbDitems) * sizeD;
 			int y_2 = (map[y][x] / nbDitems) * sizeD;
 			sfIntRect rectangle = { x_2,y_2,sizeD,sizeD};
@@ -66,11 +55,9 @@ void affichage_map(sfText* text, sfWindow* window, sfView* view) {
 			else{
 				//sfSprite_setColor(sprite_map, sfBlack);
 			}
-			//printf("Le caractère %d a le code %d !\n", x,y);
 			sfSprite_setPosition(sprite_map, position);
 			sfSprite_setTextureRect(sprite_map,rectangle);
 			sfRenderWindow_drawSprite(window, sprite_map, NULL);
-			sfRenderWindow_getDefaultView(window);
 		}
 	}
 }
