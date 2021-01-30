@@ -17,17 +17,17 @@ int main(){
 	sfText_setString(text, "0");
 	sfText_setCharacterSize(text, 25);
 	//map dessins
-	const sizeD = 32;
+	int sizeD = 32;
 	//map (y/x)
-	const sizeY = 5; const sizeX = 10;
-	const int map[5][10] = {
+	int sizeY = 5; int sizeX = 10;
+	int map[5][10] = {
 			{0,1,2,3,0,2,3,5,4,4},
 			{0,1,2,3,0,2,3,5,4,4},
 			{0,1,2,3,0,2,3,5,4,4},
 			{0,1,2,3,0,2,3,5,4,4},
 			{0,1,2,3,0,2,3,5,4,4}
 	};
-	//caméra
+	//camï¿½ra
 	sfView* view;
 	view = sfView_create();
 	sfVector2f size = { (sizeX * sizeD)*1.1,(sizeY*sizeD)*1.1};
@@ -38,7 +38,7 @@ int main(){
 	//boucle
 	while (sfRenderWindow_isOpen(window)){
 		while (sfRenderWindow_pollEvent(window, &event)){
-			//événements clavier
+			//ï¿½vï¿½nements clavier
 			if (event.type == sfEvtClosed)
 				sfRenderWindow_close(window);
 		}
@@ -49,7 +49,7 @@ int main(){
 			for (int x = 0; x < sizeX; x++) {
 				sfVector2f vector = {x*sizeD,y*sizeD};
 				char s[10];
-				sprintf_s(s, 10, "%d", map[y][x]);
+				//sprintf_s(s, 10, "%d", map[y][x]);
 				sfText_setString(text, s);
 				sfText_setPosition(text, vector);
 				sfRenderWindow_setView(window,view);
