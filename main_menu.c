@@ -95,7 +95,7 @@ int main_menu(void)
     sfSprite *help = create_help_button();
     sfSprite *quit = create_quit_button();
     sfEvent event;
-    sfMusic *music = sfMusic_createFromFile("evolve_main_theme.ogg");
+    sfMusic *music = sfMusic_createFromFile("music/evolve_main_theme.ogg");
     sfText *title = sfText_create(); 
 
     sfMusic_play(music);
