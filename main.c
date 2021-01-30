@@ -5,11 +5,10 @@
 int compteurNiveau = 0;
 
 int main(){
-	//fenetre
-	sfVideoMode mode = { 800, 400, 32 };
+	//fenetre fullscreen par défault
+	sfVideoMode mode = { sfVideoMode_getDesktopMode().width, sfVideoMode_getDesktopMode().height, sfVideoMode_getDesktopMode().bitsPerPixel };
+	sfRenderWindow* window = sfRenderWindow_create(mode, "SFML window", sfFullscreen, NULL);
 	sfEvent event;
-	//sfRenderWindow* window = sfRenderWindow_create(mode, "SFML window", sfResize | sfClose, NULL);
-	sfRenderWindow* window = sfRenderWindow_create(mode, "SFML window", sfResize | sfClose, NULL);
 	//font & text
 	sfFont* font; 
 	font = sfFont_createFromFile("base.ttf");
@@ -53,6 +52,10 @@ int main(){
 			}
 
 			if (event.type == sfEvtKeyPressed) {
+
+				if (sfKeyboard_isKeyPressed(sfKeyEscape))
+					sfRenderWindow_close(window);
+
 				if (sfKeyboard_isKeyPressed(sfKeyLeft))
 					deplacement_perso(1);
 				else if (sfKeyboard_isKeyPressed(sfKeyRight))
