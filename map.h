@@ -15,9 +15,9 @@ sfSprite* sprite_map;
 int map[5][10];
 
 const int map1[5][10] = {
-	{0,1,2,3,0,2,3,5,4,4},
-	{0,1,2,3,0,2,3,5,4,1000},
-	{0,1,2,3,0,2,3,5,4,4},
+	{0,1,2,3,0,2,3,5,7,4},
+	{0,1,2,3,0,2,3,5,10,1000},
+	{0,1,2,3,0,2,3,5,11,4},
 	{999,1,2,3,0,2,3,5,4,4},
 	{0,1,2,3,0,2,3,5,4,4}
 };
@@ -59,6 +59,13 @@ void affichage_map(sfText* text, sfWindow* window, sfView* view) {
 			int y_2 = (map[y][x] / nbDitems) * sizeD;
 			sfIntRect rectangle = { x_2,y_2,sizeD,sizeD};
 			sfVector2f position = { sizeD * x, sizeD * y };
+			//case visible
+			if (map[y][x] == 11) {
+				sfSprite_setColor(sprite_map, sfWhite);
+			}
+			else{
+				sfSprite_setColor(sprite_map, sfBlack);
+			}
 			sfSprite_setPosition(sprite_map, position);
 			sfSprite_setTextureRect(sprite_map,rectangle);
 			sfRenderWindow_drawSprite(window, sprite_map, NULL);
