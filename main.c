@@ -1,4 +1,7 @@
 #include "libs.h"
+#include "map.h"
+
+int compteurNiveau = 0;
 
 int main(){
 	//fenetre
@@ -17,16 +20,13 @@ int main(){
 	sfText_setString(text, "0");
 	sfText_setCharacterSize(text, 25);
 	//map dessins
-	int sizeD = 32;
+	texture_map = sfTexture_createFromFile("tilesheet.png", NULL);
+	if (!texture_map)
+		return EXIT_FAILURE;
+	sprite_map = sfSprite_create();
+	sfSprite_setTexture(sprite_map, texture_map, sfTrue);
 	//map (y/x)
-	int sizeY = 5; int sizeX = 10;
-	int map[5][10] = {
-			{0,1,2,3,0,2,3,5,4,4},
-			{0,1,2,3,0,2,3,5,4,4},
-			{0,1,2,3,0,2,3,5,4,4},
-			{0,1,2,3,0,2,3,5,4,4},
-			{0,1,2,3,0,2,3,5,4,4}
-	};
+	update_map(compteurNiveau);
 	//cam�ra
 	sfView* view;
 	view = sfView_create();
@@ -45,23 +45,15 @@ int main(){
 		//render
 		sfRenderWindow_clear(window, sfBlack);
 		//affichage
-		for (int y = 0; y < sizeY; y++) {
-			for (int x = 0; x < sizeX; x++) {
-				sfVector2f vector = {x*sizeD,y*sizeD};
-				char s[10];
-				//sprintf_s(s, 10, "%d", map[y][x]);
-				sfText_setString(text, s);
-				sfText_setPosition(text, vector);
-				sfRenderWindow_setView(window,view);
-				sfRenderWindow_drawText(window, text, NULL);
-				sfRenderWindow_getDefaultView(window);
-			}
-		}
+		affichage_map(text, window, view);
 		sfRenderWindow_display(window);
 	}
 	//destroy
 	sfRenderWindow_destroy(window);
 	sfFont_destroy(font);
 	sfText_destroy(text);
+	sfSprite_destroy(sprite_map);
+	sfTexture_destroy(texture_map);
+	sfView_destroy(view);
 	return EXIT_SUCCESS;
 }
