@@ -5,5 +5,6 @@
 #include <stdlib.h>
 #include <SFML/Graphics.h>
 #include <SFML/Audio.h>
+#include <SFML/Config.h>
 
 #endif
