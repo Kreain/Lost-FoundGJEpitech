@@ -11,6 +11,10 @@ int valeurwaw = 0;
 bool waw = false;
 bool canWaw = true;
 sfClock* timerwaw;
+bool rect1bool = false;
+bool rect2bool = false;
+bool rect3bool = false;
+bool rect4bool = false;
 
 void jeu(){
 	//fenetre fullscreen par défault
@@ -34,6 +38,10 @@ void jeu(){
 		exit(EXIT_FAILURE);
 	sfSprite* waw_playerS = sfSprite_create();
 	sfSprite_setTexture(waw_playerS, waw_playerT, sfTrue);
+	sfRectangleShape* rect1 = sfRectangleShape_create();
+	sfRectangleShape* rect2 = sfRectangleShape_create();
+	sfRectangleShape* rect3 = sfRectangleShape_create();
+	sfRectangleShape* rect4 = sfRectangleShape_create();
 	//musique
 	sfMusic* music = sfMusic_createFromFile("music/battement.ogg");
 	sfMusic_play(music);
@@ -86,6 +94,9 @@ void jeu(){
 			}
 		}
 
+		int joueurX = sfSprite_getPosition(sprite_perso).x / 32;
+		int joueurY = sfSprite_getPosition(sprite_perso).y / 32;
+
 		while (sfRenderWindow_pollEvent(window, &event)){
 			//�v�nements clavier
 			if (event.type == sfEvtClosed) {
@@ -102,14 +113,22 @@ void jeu(){
 					canWaw = false;
 				}
 
-				if (sfKeyboard_isKeyPressed(sfKeyLeft))
-					deplacement_perso(1);
-				else if (sfKeyboard_isKeyPressed(sfKeyRight))
-					deplacement_perso(0);
-				else if (sfKeyboard_isKeyPressed(sfKeyUp))
-					deplacement_perso(3);
-				else if (sfKeyboard_isKeyPressed(sfKeyDown))
-					deplacement_perso(2);
+				if (sfKeyboard_isKeyPressed(sfKeyLeft)){
+					if(detectionMurGauche(joueurX-1, joueurY) == 0)
+						deplacement_perso(1);
+				}
+				else if (sfKeyboard_isKeyPressed(sfKeyRight)){
+					if (detectionMurDroite(joueurX+1, joueurY) == 0)
+						deplacement_perso(0);
+				}
+				if (sfKeyboard_isKeyPressed(sfKeyUp)){
+					if (detectionMurHaut(joueurX , joueurY-1) == 0)
+						deplacement_perso(3);
+				}
+				else if (sfKeyboard_isKeyPressed(sfKeyDown)){
+					if (detectionMurBas(joueurX , joueurY+1) == 0)
+						deplacement_perso(2);
+				}
 			}
 
 		}
@@ -119,8 +138,55 @@ void jeu(){
 		sfRenderWindow_setView(window, view);
 		affichage_map(window);
 		affichage_perso(window, sfTime_asMilliseconds(sfClock_getElapsedTime(cloak)));
+
 		if (waw) {
-			if (sfTime_asMilliseconds(sfClock_getElapsedTime(timerwaw)) > 200) {
+			if (valeurwaw == 0) {
+				if (detectionMurGauche(joueurX-1, joueurY) == 1) {
+					sfVector2f positionRect = { sfSprite_getPosition(sprite_perso).x ,sfSprite_getPosition(sprite_perso).y };
+					sfRectangleShape_setPosition(rect1, positionRect);
+					sfVector2f sizeRect = { 1,32 };
+					sfRectangleShape_setSize(rect1, sizeRect);
+					sfRectangleShape_setFillColor(rect1, sfRed);
+					rect1bool = true;
+				}
+				else {
+					rect1bool = false;
+				}
+				if (detectionMurDroite(joueurX + 1, joueurY) == 1) {
+					sfVector2f positionRect = { sfSprite_getPosition(sprite_perso).x + 31 ,sfSprite_getPosition(sprite_perso).y };
+					sfRectangleShape_setPosition(rect2, positionRect);
+					sfVector2f sizeRect = { 1,32 };
+					sfRectangleShape_setSize(rect2, sizeRect);
+					sfRectangleShape_setFillColor(rect2, sfRed);
+					rect2bool = true;
+				}
+				else {
+					rect2bool = false;
+				}
+				if (detectionMurHaut(joueurX, joueurY-1) == 1) {
+					sfVector2f positionRect = { sfSprite_getPosition(sprite_perso).x  ,sfSprite_getPosition(sprite_perso).y };
+					sfRectangleShape_setPosition(rect3, positionRect);
+					sfVector2f sizeRect = { 32,1 };
+					sfRectangleShape_setSize(rect3, sizeRect);
+					sfRectangleShape_setFillColor(rect3, sfRed);
+					rect3bool = true;
+				}
+				else {
+					rect3bool = false;
+				}
+				if (detectionMurBas(joueurX, joueurY + 1) == 1) {
+					sfVector2f positionRect = { sfSprite_getPosition(sprite_perso).x  ,sfSprite_getPosition(sprite_perso).y + 31 };
+					sfRectangleShape_setPosition(rect4, positionRect);
+					sfVector2f sizeRect = { 32,1 };
+					sfRectangleShape_setSize(rect4, sizeRect);
+					sfRectangleShape_setFillColor(rect4, sfRed);
+					rect4bool = true;
+				}
+				else {
+					rect4bool = false;
+				}
+			}
+			if (sfTime_asMilliseconds(sfClock_getElapsedTime(timerwaw)) > 150) {
 				sfClock_restart(timerwaw);
 				valeurwaw = valeurwaw + 1;
 				if (valeurwaw > 3) {
@@ -133,6 +199,14 @@ void jeu(){
 				sfSprite_setPosition(waw_playerS, positionwaw);
 				sfSprite_setTextureRect(waw_playerS, rectangle);
 			}
+			if(rect1bool)
+				sfRenderWindow_drawRectangleShape(window, rect1, NULL);
+			if(rect2bool)
+				sfRenderWindow_drawRectangleShape(window, rect2, NULL);
+			if(rect3bool)
+				sfRenderWindow_drawRectangleShape(window, rect3, NULL);
+			if(rect4bool)
+				sfRenderWindow_drawRectangleShape(window, rect4, NULL);
 			sfRenderWindow_drawSprite(window, waw_playerS, NULL);
 		}
 		sfRenderWindow_getDefaultView(window);
@@ -147,7 +221,12 @@ void jeu(){
 	sfTexture_destroy(texture_map);
 	sfSprite_destroy(sprite_perso);
 	sfTexture_destroy(texture_perso);
+	sfRectangleShape_destroy(rect1);
+	sfRectangleShape_destroy(rect2);
+	sfRectangleShape_destroy(rect3);
+	sfRectangleShape_destroy(rect4);
 	sfClock_destroy(cloak);
+	sfClock_destroy(timerwaw);
 	sfView_destroy(view);
 	exit(EXIT_SUCCESS);
 }

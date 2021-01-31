@@ -6,7 +6,7 @@
 int sizeY = 10; int sizeX = 20;
 int sizeD = 32; //32 pixels dessin
 int nbDitems = 10; //10 items max dans le tileset par ligne
-int maxMapFinJeu = 5;
+int maxMapFinJeu = 0;
 
 sfTexture* texture_map;
 sfSprite* sprite_map;
@@ -18,16 +18,16 @@ int exitX = 0; int exitY = 0;
 int entree = 998; int sortit = 999;
 
 int map1[10][20] = {
-	{0,1,2,3,0,2,3,5,7,4,0,1,2,3,0,2,3,5,7,4},
-	{0,1,2,3,0,2,3,5,7,4,0,1,2,3,0,2,3,5,7,4},
-	{0,1,2,3,0,2,3,5,7,4,0,1,2,3,0,2,3,5,7,999},
-	{0,1,2,3,0,2,3,5,7,4,0,1,2,3,0,2,3,5,7,4},
-	{0,1,2,3,0,2,3,5,7,4,0,1,2,3,0,2,3,5,7,4},
-	{0,1,2,3,0,2,3,5,7,4,0,1,2,3,0,2,3,5,7,4},
-	{0,1,2,3,0,2,3,5,7,4,0,1,2,3,0,2,3,5,7,4},
-	{0,1,2,3,0,2,3,5,7,4,0,1,2,3,0,2,3,5,7,4},
-	{0,1,2,3,0,2,3,5,7,4,0,1,2,3,0,2,3,5,7,4},
-	{998,1,2,3,0,2,3,5,7,4,0,1,2,3,0,2,3,5,7,4}
+	{0,1,2,3,0,2,0,0,0,4,0,1,2,3,0,0,0,5,7,4},
+	{0,1,2,3,0,0,0,5,0,4,0,1,2,3,0,2,0,0,7,4},
+	{0,1,2,3,0,2,0,0,0,4,0,1,2,3,0,2,3,0,0,999},
+	{0,1,2,3,0,2,0,5,7,4,0,1,2,3,0,2,3,5,7,4},
+	{0,1,2,3,0,2,0,5,0,0,0,1,2,3,0,2,3,5,7,4},
+	{0,1,0,0,0,2,0,0,0,4,0,1,2,3,0,2,3,5,7,4},
+	{0,1,2,0,0,0,3,5,7,4,0,1,2,3,0,2,3,5,7,4},
+	{0,1,2,3,0,0,3,5,7,4,0,0,0,0,0,2,3,5,7,4},
+	{0,1,2,0,0,0,3,5,7,4,0,1,2,3,0,2,3,5,7,4},
+	{998,0,0,0,0,2,3,5,7,4,0,1,2,3,0,2,3,5,7,4}
 };
 
 /*const int map2[5][10] = {
@@ -82,6 +82,31 @@ void update_map(int choix) {
 		}
 	}
 };
+
+int detectionMurGauche(int posX, int posY) {
+	if (map[posY][posX]==0 || map[posY][posX] == sortit || map[posY][posX] == entree)
+		return 0;
+	else
+		return 1;
+}
+int detectionMurDroite(int posX, int posY) {
+	if (map[posY][posX] == 0 || map[posY][posX] == sortit || map[posY][posX] == entree)
+		return 0;
+	else
+		return 1;
+}
+int detectionMurHaut(int posX, int posY) {
+	if (map[posY][posX] == 0 || map[posY][posX] == sortit || map[posY][posX] == entree)
+		return 0;
+	else
+		return 1;
+}
+int detectionMurBas(int posX, int posY) {
+	if (map[posY][posX] == 0 || map[posY][posX] == sortit || map[posY][posX] == entree)
+		return 0;
+	else
+		return 1;
+}
 
 void affichage_map(sfRenderWindow* window) {
 	for (int y = 0; y < sizeY; y++) {

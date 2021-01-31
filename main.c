@@ -102,9 +102,9 @@ int main(void)
     sfMusic *music = sfMusic_createFromFile("music/evolve_main_theme.ogg");
     sfText *title = sfText_create();
     sfText *title_two = sfText_create();
-    sfFont *font = sfFont_createFromFile("base.ttf")
-    sfVector2f pos = {580, 100};
-    sfVector2f pos = {580, 200};
+    sfFont* font = sfFont_createFromFile("base.ttf");
+    sfVector2f pos1 = {580, 100};
+    sfVector2f pos2 = {580, 200};
 
     sfText_setFont(title, font);
     sfText_setFont(title_two, font);
@@ -112,9 +112,8 @@ int main(void)
     sfText_setString(title_two, "Pulse");
     sfText_setColor(title, sfRed);
     sfText_setColor(title_two, sfRed);
-    sfText_setCharacterSize(70);
-    sfText_setCharacterSize(140);
-    sfTe
+    sfText_setCharacterSize(title,70);
+    sfText_setCharacterSize(title_two,140);
     sfMusic_play(music);
     sfMusic_setLoop(music, sfTrue);
     while (sfRenderWindow_isOpen(window)) {
