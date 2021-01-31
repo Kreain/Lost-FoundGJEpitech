@@ -53,14 +53,14 @@ void update_perso(int choix) {
 };
 
 void affichage_perso(sfWindow* window, sfInt32 temps) {
-	if (temps > 60) {
-		valeur = valeur + 1;
+	if (temps > 100) {
 		sfClock_restart(cloak);
+		valeur = valeur + 1;
 		if (valeur > 3)
 			valeur = 0;
+		sfIntRect rectangle = { valeur * sizePixels,0,32,32 };
+		sfSprite_setTextureRect(sprite_perso, rectangle);
 	}
-	sfIntRect rectangle = {valeur* sizePixels,0,32,32};
-	sfSprite_setTextureRect(sprite_perso, rectangle);
 	sfRenderWindow_drawSprite(window, sprite_perso, NULL);
 }
 

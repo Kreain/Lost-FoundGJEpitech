@@ -82,7 +82,7 @@ void affichage_map(sfWindow* window) {
 				sfSprite_setColor(sprite_map, sfWhite);
 			}
 			else{
-				//sfSprite_setColor(sprite_map, sfBlack);
+				sfSprite_setColor(sprite_map, sfBlack);
 			}
 			sfSprite_setPosition(sprite_map, position);
 			sfSprite_setTextureRect(sprite_map,rectangle);
