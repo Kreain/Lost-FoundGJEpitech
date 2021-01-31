@@ -46,7 +46,7 @@ void jeu(){
 	sfSprite_setTexture(sprite_map, texture_map, sfTrue);
 	//map (y/x)
 	update_map(compteurNiveau);
-	update_perso(compteurNiveau);
+	update_perso(entryX,entryY);
 	set_max(sizeX* sizeD,sizeY* sizeD);
 	//cam�ra
 	sfView* view;
@@ -57,6 +57,18 @@ void jeu(){
 	sfView_setCenter(view, sizeCenter);
 	//boucle
 	while (sfRenderWindow_isOpen(window)){
+
+		int lookX = sfSprite_getPosition(sprite_perso).x / sizePixels;
+		int lookY = sfSprite_getPosition(sprite_perso).y / sizePixels;
+
+		if (lookX == exitX && lookY == exitY) {
+			compteurNiveau++;
+			//update_map(compteurNiveau);
+			//update_perso(entryX, entryY);
+			printf("j'ai trouvé la sortie");
+			//changer de niveau etc
+		}
+
 		while (sfRenderWindow_pollEvent(window, &event)){
 			//�v�nements clavier
 			if (event.type == sfEvtClosed) {
