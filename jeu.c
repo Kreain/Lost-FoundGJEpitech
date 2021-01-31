@@ -4,7 +4,7 @@
 
 int compteurNiveau = 0;
 
-float volumeCoeur = 20.f;
+float volumeCoeur = 15.f;
 float vitesseCoeur = 0.8f;
 
 int valeurwaw = 0;

@@ -18,7 +18,7 @@ int exitX = 0; int exitY = 0;
 int entree = 998; int sortit = 999;
 
 int map1[10][20] = {
-	{0,1,2,3,0,2,0,0,0,4,0,1,2,3,0,0,0,5,7,4},
+	{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
 	{0,1,2,3,0,0,0,5,0,4,0,1,2,3,0,2,0,0,7,4},
 	{0,1,2,3,0,2,0,0,0,4,0,1,2,3,0,2,3,0,0,999},
 	{0,1,2,3,0,2,0,5,7,4,0,1,2,3,0,2,3,5,7,4},
@@ -84,24 +84,34 @@ void update_map(int choix) {
 };
 
 int detectionMurGauche(int posX, int posY) {
+	if (posY >= sizeY || posX >= sizeX || posY < 0 || posX < 0)
+		return 1;
 	if (map[posY][posX]==0 || map[posY][posX] == sortit || map[posY][posX] == entree)
 		return 0;
 	else
 		return 1;
 }
 int detectionMurDroite(int posX, int posY) {
+	if (posY >= sizeY || posX >= sizeX || posY < 0 || posX < 0)
+		return 1;
 	if (map[posY][posX] == 0 || map[posY][posX] == sortit || map[posY][posX] == entree)
 		return 0;
 	else
 		return 1;
 }
 int detectionMurHaut(int posX, int posY) {
+	if (posY >= sizeY || posX >= sizeX || posY < 0 || posX < 0)
+		return 1;
 	if (map[posY][posX] == 0 || map[posY][posX] == sortit || map[posY][posX] == entree)
 		return 0;
 	else
 		return 1;
 }
 int detectionMurBas(int posX, int posY) {
+
+	if (posY >= sizeY || posX >= sizeX || posY<0 || posX<0)
+		return 1;
+
 	if (map[posY][posX] == 0 || map[posY][posX] == sortit || map[posY][posX] == entree)
 		return 0;
 	else
