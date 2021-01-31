@@ -112,15 +112,6 @@ int main(void)
             if (event.mouseButton.button == sfMouseLeft)
                 check_mouse_button(window, music);
 
-            if (event.type == sfEvtKeyPressed) {
-                if (sfKeyboard_isKeyPressed(sfKeyReturn)) {
-                    //destroy le menu correctement
-                    sfMusic_stop(music);
-                    sfRenderWindow_close(window);
-                    jeu();
-                }
-            }
-
         }
 
         sfRenderWindow_clear(window, sfBlack);
