@@ -100,8 +100,21 @@ int main(void)
     sfSprite *quit = create_quit_button();
     sfEvent event;
     sfMusic *music = sfMusic_createFromFile("music/evolve_main_theme.ogg");
-    //sfText *title = sfText_create(); 
+    sfText *title = sfText_create();
+    sfText *title_two = sfText_create();
+    sfFont *font = sfFont_createFromFile("base.ttf")
+    sfVector2f pos = {580, 100};
+    sfVector2f pos = {580, 200};
 
+    sfText_setFont(title, font);
+    sfText_setFont(title_two, font);
+    sfText_setString(title, "Sense and");
+    sfText_setString(title_two, "Pulse");
+    sfText_setColor(title, sfRed);
+    sfText_setColor(title_two, sfRed);
+    sfText_setCharacterSize(70);
+    sfText_setCharacterSize(140);
+    sfTe
     sfMusic_play(music);
     sfMusic_setLoop(music, sfTrue);
     while (sfRenderWindow_isOpen(window)) {
