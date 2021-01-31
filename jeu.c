@@ -68,7 +68,7 @@ void jeu(){
 			update_perso(entryX, entryY);
 			//nombre de map max fin de jeu
 			if (compteurNiveau > maxMapFinJeu) {
-				sfWindow_close(window);
+				sfRenderWindow_close(window);
 			}
 		}
 
