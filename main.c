@@ -110,7 +110,7 @@ int main(void)
                 check_mouse_button(window);
 
             if (event.type == sfEvtKeyPressed) {
-                if (sfKeyboard_isKeyPressed(sfKeyEnter)) {
+                if (sfKeyboard_isKeyPressed(sfKeyReturn)) {
                     //destroy le menu correctement
                     sfMusic_stop(music);
                     sfRenderWindow_close(window);
