@@ -62,11 +62,14 @@ void jeu(){
 		int lookY = sfSprite_getPosition(sprite_perso).y / sizePixels;
 
 		if (lookX == exitX && lookY == exitY) {
-			compteurNiveau++;
-			//update_map(compteurNiveau);
-			//update_perso(entryX, entryY);
-			printf("j'ai trouvé la sortie");
 			//changer de niveau etc
+			compteurNiveau++;
+			update_map(compteurNiveau);
+			update_perso(entryX, entryY);
+			//nombre de map max fin de jeu
+			if (compteurNiveau > maxMapFinJeu) {
+				sfWindow_close(window);
+			}
 		}
 
 		while (sfRenderWindow_pollEvent(window, &event)){

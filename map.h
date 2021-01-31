@@ -6,6 +6,7 @@
 int sizeY = 10; int sizeX = 20;
 int sizeD = 32; //32 pixels dessin
 int nbDitems = 10; //10 items max dans le tileset par ligne
+int maxMapFinJeu = 5;
 
 sfTexture* texture_map;
 sfSprite* sprite_map;
