@@ -70,15 +70,17 @@ sfSprite *create_help_button(void)
     return help;
 }
 
-void check_mouse_button(sfRenderWindow *window)
+void check_mouse_button(sfRenderWindow *window, sfMusic *music)
 {
     sfVector2i pos_mouse = sfMouse_getPositionRenderWindow(window);
     int x = 0;
 
     if (pos_mouse.x >= 190 && pos_mouse.x <= 440)
-        if (pos_mouse.y <= 140 && pos_mouse.y >= 40)
-            //start
-            x++;
+        if (pos_mouse.y <= 140 && pos_mouse.y >= 40) {
+            sfMusic_stop(music);
+            sfRenderWindow_close(window);
+            jeu();
+        }
         if (pos_mouse.y <= 340 && pos_mouse.y >= 140)
             //help
             x++;
@@ -107,7 +109,7 @@ int main(void)
             if (event.type == sfEvtClosed)
                 sfRenderWindow_close(window);
             if (event.mouseButton.button == sfMouseLeft)
-                check_mouse_button(window);
+                check_mouse_button(window, music);
 
             if (event.type == sfEvtKeyPressed) {
                 if (sfKeyboard_isKeyPressed(sfKeyEnter)) {
