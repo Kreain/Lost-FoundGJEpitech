@@ -83,7 +83,7 @@ void update_map(int choix) {
 	}
 };
 
-void affichage_map(sfWindow* window) {
+void affichage_map(sfRenderWindow* window) {
 	for (int y = 0; y < sizeY; y++) {
 		for (int x = 0; x < sizeX; x++) {
 			int x_2 = ((map[y][x] - 1) % nbDitems) * sizeD;

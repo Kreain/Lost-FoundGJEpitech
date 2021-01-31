@@ -44,7 +44,7 @@ void update_perso(int x,int y) {
 	sfSprite_setPosition(sprite_perso, position);
 };
 
-void affichage_perso(sfWindow* window, sfInt32 temps) {
+void affichage_perso(sfRenderWindow* window, sfInt32 temps) {
 	if (temps > 100) {
 		sfClock_restart(cloak);
 		valeur = valeur + 1;

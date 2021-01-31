@@ -75,7 +75,7 @@ void check_mouse_button(sfRenderWindow *window, sfMusic *music)
     sfVector2i pos_mouse = sfMouse_getPositionRenderWindow(window);
     int x = 0;
 
-    if (pos_mouse.x >= 190 && pos_mouse.x <= 440)
+    if (pos_mouse.x >= 190 && pos_mouse.x <= 440) {
         if (pos_mouse.y <= 140 && pos_mouse.y >= 40) {
             sfMusic_stop(music);
             sfRenderWindow_close(window);
@@ -86,6 +86,7 @@ void check_mouse_button(sfRenderWindow *window, sfMusic *music)
             x++;
         if (pos_mouse.y <= 540 && pos_mouse.y >= 440)
             sfRenderWindow_close(window);
+    }
 }
 
 int main(void)
@@ -99,7 +100,7 @@ int main(void)
     sfSprite *quit = create_quit_button();
     sfEvent event;
     sfMusic *music = sfMusic_createFromFile("music/evolve_main_theme.ogg");
-    sfText *title = sfText_create(); 
+    //sfText *title = sfText_create(); 
 
     sfMusic_play(music);
     sfMusic_setLoop(music, sfTrue);

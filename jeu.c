@@ -15,7 +15,7 @@ void jeu(){
 	sfFont* font; 
 	font = sfFont_createFromFile("base.ttf");
 	if (!font)
-		return EXIT_FAILURE;
+		exit(EXIT_FAILURE);
 	/*sfText* text;
 	text = sfText_create();
 	sfText_setFont(text, font);
@@ -31,7 +31,7 @@ void jeu(){
 	//personnage
 	texture_perso = sfTexture_createFromFile("pict/perso.png", NULL);
 	if (!texture_perso)
-		return EXIT_FAILURE;
+		exit(EXIT_FAILURE);
 	sprite_perso = sfSprite_create();
 	sfSprite_setTexture(sprite_perso, texture_perso, sfTrue);
 	//temps
@@ -41,7 +41,7 @@ void jeu(){
 	//map dessins
 	texture_map = sfTexture_createFromFile("pict/tilesheet.png", NULL);
 	if (!texture_map)
-		return EXIT_FAILURE;
+		exit(EXIT_FAILURE);
 	sprite_map = sfSprite_create();
 	sfSprite_setTexture(sprite_map, texture_map, sfTrue);
 	//map (y/x)
@@ -114,5 +114,5 @@ void jeu(){
 	sfTexture_destroy(texture_perso);
 	sfClock_destroy(cloak);
 	sfView_destroy(view);
-	return EXIT_SUCCESS;
+	exit(EXIT_SUCCESS);
 }
