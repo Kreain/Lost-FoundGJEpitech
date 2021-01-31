@@ -21,13 +21,13 @@ void jeu(){
 	sfText_setString(text, "0");
 	sfText_setCharacterSize(text, 25);*/
 	//personnage
-	texture_perso = sfTexture_createFromFile("perso.png", NULL);
+	texture_perso = sfTexture_createFromFile("pict/perso.png", NULL);
 	if (!texture_perso)
 		return EXIT_FAILURE;
 	sprite_perso = sfSprite_create();
 	sfSprite_setTexture(sprite_perso, texture_perso, sfTrue);
 	//map dessins
-	texture_map = sfTexture_createFromFile("tilesheet.png", NULL);
+	texture_map = sfTexture_createFromFile("pict/tilesheet.png", NULL);
 	if (!texture_map)
 		return EXIT_FAILURE;
 	sprite_map = sfSprite_create();
