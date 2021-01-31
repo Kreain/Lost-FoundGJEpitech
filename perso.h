@@ -5,10 +5,12 @@
 
 sfTexture* texture_perso;
 sfSprite* sprite_perso;
+sfClock* cloak;
 
 int persoY = 0; int persoX = 0;
 int sizePixels = 32; //32 pixels dessin
 int deplacement = 32;
+int valeur = 0;
 
 int maxY = 0; int maxX = 0;
 
@@ -50,7 +52,15 @@ void update_perso(int choix) {
 	sfSprite_setPosition(sprite_perso, position);
 };
 
-void affichage_perso(sfWindow* window) {
+void affichage_perso(sfWindow* window, sfInt32 temps) {
+	if (temps > 60) {
+		valeur = valeur + 1;
+		sfClock_restart(cloak);
+		if (valeur > 3)
+			valeur = 0;
+	}
+	sfIntRect rectangle = {valeur* sizePixels,0,32,32};
+	sfSprite_setTextureRect(sprite_perso, rectangle);
 	sfRenderWindow_drawSprite(window, sprite_perso, NULL);
 }
 

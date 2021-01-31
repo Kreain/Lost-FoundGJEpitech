@@ -26,6 +26,10 @@ void jeu(){
 		return EXIT_FAILURE;
 	sprite_perso = sfSprite_create();
 	sfSprite_setTexture(sprite_perso, texture_perso, sfTrue);
+	//temps
+	cloak = sfClock_create();
+	sfClock_restart(cloak);
+	//timer.microseconds;
 	//map dessins
 	texture_map = sfTexture_createFromFile("pict/tilesheet.png", NULL);
 	if (!texture_map)
@@ -72,7 +76,7 @@ void jeu(){
 		//affichage
 		sfRenderWindow_setView(window, view);
 		affichage_map(window);
-		affichage_perso(window);
+		affichage_perso(window, sfTime_asMilliseconds(sfClock_getElapsedTime(cloak)));
 		sfRenderWindow_getDefaultView(window);
 		sfRenderWindow_display(window);
 	}
@@ -84,6 +88,7 @@ void jeu(){
 	sfTexture_destroy(texture_map);
 	sfSprite_destroy(sprite_perso);
 	sfTexture_destroy(texture_perso);
+	sfClock_destroy(cloak);
 	sfView_destroy(view);
 	return EXIT_SUCCESS;
 }
