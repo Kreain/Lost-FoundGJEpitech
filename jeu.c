@@ -3,6 +3,8 @@
 #include "perso.h"
 
 int compteurNiveau = 0;
+float volumeCoeur = 20.f;
+float vitesseCoeur = 0.8f;
 
 void jeu(){
 	//fenetre fullscreen par défault
@@ -20,6 +22,12 @@ void jeu(){
 	sfText_setFillColor(text, sfWhite);
 	sfText_setString(text, "0");
 	sfText_setCharacterSize(text, 25);*/
+	//musique
+	sfMusic* music = sfMusic_createFromFile("music/battement.ogg");
+	sfMusic_play(music);
+	sfMusic_setLoop(music, sfTrue);
+	sfMusic_setVolume(music, volumeCoeur);
+	sfMusic_setPitch(music, vitesseCoeur);
 	//personnage
 	texture_perso = sfTexture_createFromFile("pict/perso.png", NULL);
 	if (!texture_perso)
@@ -84,6 +92,7 @@ void jeu(){
 	sfRenderWindow_destroy(window);
 	sfFont_destroy(font);
 	//sfText_destroy(text);
+	sfMusic_destroy(music);
 	sfSprite_destroy(sprite_map);
 	sfTexture_destroy(texture_map);
 	sfSprite_destroy(sprite_perso);
