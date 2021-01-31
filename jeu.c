@@ -3,8 +3,14 @@
 #include "perso.h"
 
 int compteurNiveau = 0;
+
 float volumeCoeur = 20.f;
 float vitesseCoeur = 0.8f;
+
+int valeurwaw = 0;
+bool waw = false;
+bool canWaw = true;
+sfClock* timerwaw;
 
 void jeu(){
 	//fenetre fullscreen par défault
@@ -22,6 +28,12 @@ void jeu(){
 	sfText_setFillColor(text, sfWhite);
 	sfText_setString(text, "0");
 	sfText_setCharacterSize(text, 25);*/
+	//waw
+	sfTexture* waw_playerT = sfTexture_createFromFile("pict/waw.png",NULL);
+	if (!waw_playerT)
+		exit(EXIT_FAILURE);
+	sfSprite* waw_playerS = sfSprite_create();
+	sfSprite_setTexture(waw_playerS, waw_playerT, sfTrue);
 	//musique
 	sfMusic* music = sfMusic_createFromFile("music/battement.ogg");
 	sfMusic_play(music);
@@ -38,6 +50,8 @@ void jeu(){
 	cloak = sfClock_create();
 	sfClock_restart(cloak);
 	//timer.microseconds;
+	timerwaw = sfClock_create();
+	sfClock_restart(timerwaw);
 	//map dessins
 	texture_map = sfTexture_createFromFile("pict/tilesheet.png", NULL);
 	if (!texture_map)
@@ -83,6 +97,11 @@ void jeu(){
 				if (sfKeyboard_isKeyPressed(sfKeyEscape))
 					sfRenderWindow_close(window);
 
+				if (sfKeyboard_isKeyPressed(sfKeySpace) && canWaw) {
+					waw = true;
+					canWaw = false;
+				}
+
 				if (sfKeyboard_isKeyPressed(sfKeyLeft))
 					deplacement_perso(1);
 				else if (sfKeyboard_isKeyPressed(sfKeyRight))
@@ -100,6 +119,22 @@ void jeu(){
 		sfRenderWindow_setView(window, view);
 		affichage_map(window);
 		affichage_perso(window, sfTime_asMilliseconds(sfClock_getElapsedTime(cloak)));
+		if (waw) {
+			if (sfTime_asMilliseconds(sfClock_getElapsedTime(timerwaw)) > 200) {
+				sfClock_restart(timerwaw);
+				valeurwaw = valeurwaw + 1;
+				if (valeurwaw > 3) {
+					valeurwaw = 0;
+					canWaw = true;
+					waw = false;
+				}
+				sfIntRect rectangle = { valeurwaw * sizePixels,0,32,32 };
+				sfVector2f positionwaw = { sfSprite_getPosition(sprite_perso).x ,sfSprite_getPosition(sprite_perso).y};
+				sfSprite_setPosition(waw_playerS, positionwaw);
+				sfSprite_setTextureRect(waw_playerS, rectangle);
+			}
+			sfRenderWindow_drawSprite(window, waw_playerS, NULL);
+		}
 		sfRenderWindow_getDefaultView(window);
 		sfRenderWindow_display(window);
 	}
